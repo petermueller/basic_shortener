@@ -5,7 +5,7 @@ defmodule ShortWeb.ShortLinkControllerTest do
 
   @create_attrs %{status: :unpublished, slug: "some slug", long_url: "some long_url", times_used: 42}
   @update_attrs %{status: :published, slug: "some updated slug", long_url: "some updated long_url", times_used: 43}
-  @invalid_attrs %{status: nil, slug: nil, long_url: nil, times_used: nil}
+  @invalid_attrs %{status: nil, slug: nil, long_url: "custom-scheme://deep/link", times_used: nil}
 
   describe "index" do
     test "lists all short_link", %{conn: conn} do
@@ -16,7 +16,7 @@ defmodule ShortWeb.ShortLinkControllerTest do
 
   describe "new short_link" do
     test "renders form", %{conn: conn} do
-      conn = get(conn, ~p"/short_link/new")
+      conn = get(conn, ~p"/")
       assert html_response(conn, 200) =~ "New Short link"
     end
   end
