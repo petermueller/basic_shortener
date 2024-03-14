@@ -7,7 +7,11 @@
   </:actions>
 </.header>
 
-<.table id="short_link" rows={@short_link_collection} row_click={&JS.navigate(~p"/short_link/#{&1}")}>
+<.table
+  id="short_link"
+  rows={@short_link_collection}
+  row_click={&JS.navigate(~p"/short_link/#{&1}")}
+>
   <:col :let={short_link} label="Slug"><%= short_link.slug %></:col>
   <:col :let={short_link} label="Long url"><%= short_link.long_url %></:col>
   <:col :let={short_link} label="Times used"><%= short_link.times_used %></:col>

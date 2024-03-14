@@ -3,8 +3,18 @@ defmodule ShortWeb.ShortLinkControllerTest do
 
   import Short.ShortenedLinksFixtures
 
-  @create_attrs %{status: :unpublished, slug: "someSlug", long_url: "https://example.com", times_used: 42}
-  @update_attrs %{status: :published, slug: "someUpdatedSlug", long_url: "https://example.com/updated", times_used: 43}
+  @create_attrs %{
+    status: :unpublished,
+    slug: "someSlug",
+    long_url: "https://example.com",
+    times_used: 42
+  }
+  @update_attrs %{
+    status: :published,
+    slug: "someUpdatedSlug",
+    long_url: "https://example.com/updated",
+    times_used: 43
+  }
   @invalid_attrs %{status: nil, slug: nil, long_url: "custom-scheme://deep/link", times_used: nil}
 
   describe "index" do

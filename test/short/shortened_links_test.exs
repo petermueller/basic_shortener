@@ -36,9 +36,16 @@ defmodule Short.ShortenedLinksTest do
 
     test "update_short_link/2 with valid data updates the short_link" do
       short_link = short_link_fixture()
-      update_attrs = %{status: :published, slug: "someUpdatedSlug", long_url: "https://example.com/updated"}
 
-      assert {:ok, %ShortLink{} = short_link} = ShortenedLinks.update_short_link(short_link, update_attrs)
+      update_attrs = %{
+        status: :published,
+        slug: "someUpdatedSlug",
+        long_url: "https://example.com/updated"
+      }
+
+      assert {:ok, %ShortLink{} = short_link} =
+               ShortenedLinks.update_short_link(short_link, update_attrs)
+
       assert short_link.status == :published
       assert short_link.slug == "someUpdatedSlug"
       assert short_link.long_url == "https://example.com/updated"
@@ -47,7 +54,10 @@ defmodule Short.ShortenedLinksTest do
 
     test "update_short_link/2 with invalid data returns error changeset" do
       short_link = short_link_fixture()
-      assert {:error, %Ecto.Changeset{}} = ShortenedLinks.update_short_link(short_link, @invalid_attrs)
+
+      assert {:error, %Ecto.Changeset{}} =
+               ShortenedLinks.update_short_link(short_link, @invalid_attrs)
+
       assert short_link == ShortenedLinks.get_short_link!(short_link.id)
     end
 

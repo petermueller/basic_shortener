@@ -2,7 +2,6 @@ defmodule ShortWeb.AnonUserCanShortenLinkTest do
   use ShortWeb.FeatureCase, async: true
 
   test "anonymous users can shorten links", %{conn: conn} do
-
     session =
       conn
       |> visit(~p"/")
