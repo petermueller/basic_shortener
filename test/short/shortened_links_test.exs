@@ -21,12 +21,12 @@ defmodule Short.ShortenedLinksTest do
     end
 
     test "create_short_link/1 with valid data creates a short_link" do
-      valid_attrs = %{status: :unpublished, slug: "some slug", long_url: "some long_url", times_used: 42}
+      valid_attrs = %{status: :unpublished, slug: "someSlug", long_url: "https://example.com", times_used: 42}
 
       assert {:ok, %ShortLink{} = short_link} = ShortenedLinks.create_short_link(valid_attrs)
       assert short_link.status == :unpublished
-      assert short_link.slug == "some slug"
-      assert short_link.long_url == "some long_url"
+      assert short_link.slug == "someSlug"
+      assert short_link.long_url == "https://example.com"
       assert short_link.times_used == 42
     end
 
@@ -36,12 +36,12 @@ defmodule Short.ShortenedLinksTest do
 
     test "update_short_link/2 with valid data updates the short_link" do
       short_link = short_link_fixture()
-      update_attrs = %{status: :published, slug: "some updated slug", long_url: "some updated long_url", times_used: 43}
+      update_attrs = %{status: :published, slug: "someUpdatedSlug", long_url: "https://example.com/updated", times_used: 43}
 
       assert {:ok, %ShortLink{} = short_link} = ShortenedLinks.update_short_link(short_link, update_attrs)
       assert short_link.status == :published
-      assert short_link.slug == "some updated slug"
-      assert short_link.long_url == "some updated long_url"
+      assert short_link.slug == "someUpdatedSlug"
+      assert short_link.long_url == "https://example.com/updated"
       assert short_link.times_used == 43
     end
 

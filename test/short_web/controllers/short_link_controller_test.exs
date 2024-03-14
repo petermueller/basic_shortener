@@ -3,8 +3,8 @@ defmodule ShortWeb.ShortLinkControllerTest do
 
   import Short.ShortenedLinksFixtures
 
-  @create_attrs %{status: :unpublished, slug: "some slug", long_url: "some long_url", times_used: 42}
-  @update_attrs %{status: :published, slug: "some updated slug", long_url: "some updated long_url", times_used: 43}
+  @create_attrs %{status: :unpublished, slug: "someSlug", long_url: "https://example.com", times_used: 42}
+  @update_attrs %{status: :published, slug: "someUpdatedSlug", long_url: "https://example.com/updated", times_used: 43}
   @invalid_attrs %{status: nil, slug: nil, long_url: "custom-scheme://deep/link", times_used: nil}
 
   describe "index" do
@@ -55,7 +55,7 @@ defmodule ShortWeb.ShortLinkControllerTest do
       assert redirected_to(conn) == ~p"/short_link/#{short_link}"
 
       conn = get(conn, ~p"/short_link/#{short_link}")
-      assert html_response(conn, 200) =~ "some updated slug"
+      assert html_response(conn, 200) =~ "http://localhost:4002/someUpdatedSlug"
     end
 
     test "renders errors when data is invalid", %{conn: conn, short_link: short_link} do

@@ -7,7 +7,7 @@ defmodule Short.ShortenedLinksFixtures do
   @doc """
   Generate a unique short_link slug.
   """
-  def unique_short_link_slug, do: "some slug#{System.unique_integer([:positive])}"
+  def unique_short_link_slug, do: "someSlug#{System.unique_integer([:positive])}"
 
   def long_url, do: Faker.Internet.url()
 
@@ -17,10 +17,7 @@ defmodule Short.ShortenedLinksFixtures do
   def short_link_fixture(attrs \\ %{}) do
     {:ok, short_link} =
       attrs
-      |> Enum.into(%{
-        long_url: long_url(),
-        slug: unique_short_link_slug()
-      })
+      |> Enum.into(%{long_url: long_url()})
       |> Short.ShortenedLinks.create_short_link()
 
     short_link
