@@ -4,6 +4,11 @@ defmodule ShortWeb.ShortLinkController do
   alias Short.ShortenedLinks
   alias Short.ShortenedLinks.ShortLink
 
+  def redirect_slug(conn, %{"slug" => slug}) do
+    short_link = ShortenedLinks.get_short_link_by_slug!(slug)
+    redirect(conn, external: short_link.long_url)
+  end
+
   def index(conn, _params) do
     short_link = ShortenedLinks.list_short_link()
     render(conn, :index, short_link_collection: short_link)

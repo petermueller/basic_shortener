@@ -37,6 +37,8 @@ defmodule Short.ShortenedLinks do
   """
   def get_short_link!(id), do: Repo.get!(ShortLink, id)
 
+  def get_short_link_by_slug!(slug), do: Repo.get_by!(ShortLink, slug: slug)
+
   @doc """
   Creates a short_link.
 

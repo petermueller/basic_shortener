@@ -12,6 +12,9 @@
   <.list>
     <:item title="Slug">
       <.link href={url(~p"/#{@short_link.slug}")}><%= url(~p"/#{@short_link.slug}") %></.link>
+      <.link class="slug-test-link text-indigo-600" href={url(~p"/#{@short_link.slug}")}>
+        Test
+      </.link>
     </:item>
     <:item title="Long url">
       <.link href={@short_link.long_url}><%= @short_link.long_url %></.link>
