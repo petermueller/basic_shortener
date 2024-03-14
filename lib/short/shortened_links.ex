@@ -4,8 +4,8 @@ defmodule Short.ShortenedLinks do
   """
 
   import Ecto.Query, warn: false
-  alias Short.Repo
 
+  alias Short.Repo
   alias Short.ShortenedLinks.ShortLink
 
   @doc """

@@ -19,9 +19,8 @@ defmodule ShortWeb.FeatureCase do
     quote do
       use ShortWeb, :verified_routes
 
-      import ShortWeb.FeatureCase
-
       import PhoenixTest
+      import ShortWeb.FeatureCase
     end
   end
 

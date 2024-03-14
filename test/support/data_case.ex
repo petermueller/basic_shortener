@@ -18,12 +18,12 @@ defmodule Short.DataCase do
 
   using do
     quote do
-      alias Short.Repo
-
       import Ecto
       import Ecto.Changeset
       import Ecto.Query
       import Short.DataCase
+
+      alias Short.Repo
     end
   end
 

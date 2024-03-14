@@ -44,12 +44,7 @@ defmodule Short.MixProject do
       {:esbuild, "~> 0.8", runtime: Mix.env() == :dev},
       {:tailwind, "~> 0.2", runtime: Mix.env() == :dev},
       {:heroicons,
-       github: "tailwindlabs/heroicons",
-       tag: "v2.1.1",
-       sparse: "optimized",
-       app: false,
-       compile: false,
-       depth: 1},
+       github: "tailwindlabs/heroicons", tag: "v2.1.1", sparse: "optimized", app: false, compile: false, depth: 1},
       {:telemetry_metrics, "~> 0.6"},
       {:telemetry_poller, "~> 1.0"},
       {:gettext, "~> 0.20"},
@@ -61,7 +56,8 @@ defmodule Short.MixProject do
       {:mix_test_interactive, "~> 2.0", only: :dev, runtime: false},
       {:phoenix_test, "~> 0.2.8", only: :test, runtime: false},
       {:faker, "~> 0.18", only: :test},
-      {:puid, "~> 2.1"}
+      {:puid, "~> 2.1"},
+      {:styler, "~> 0.11", only: [:dev, :test], runtime: false}
     ]
   end
 

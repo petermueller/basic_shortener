@@ -4,9 +4,9 @@ defmodule Short.ShortenedLinksTest do
   alias Short.ShortenedLinks
 
   describe "short_link" do
-    alias Short.ShortenedLinks.ShortLink
-
     import Short.ShortenedLinksFixtures
+
+    alias Short.ShortenedLinks.ShortLink
 
     @invalid_attrs %{status: nil, slug: nil, long_url: nil, times_used: 42}
 
