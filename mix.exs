@@ -60,7 +60,8 @@ defmodule Short.MixProject do
       {:sobelow, "~> 0.13", only: [:dev, :test], runtime: false},
       {:mix_test_interactive, "~> 2.0", only: :dev, runtime: false},
       {:phoenix_test, "~> 0.2.8", only: :test, runtime: false},
-      {:faker, "~> 0.18", only: :test}
+      {:faker, "~> 0.18", only: :test},
+      {:puid, "~> 2.1"}
     ]
   end
 

@@ -6,7 +6,7 @@ defmodule Short.ShortenedLinks.ShortLink do
   @foreign_key_type :binary_id
   schema "short_link" do
     field :status, Ecto.Enum, values: [:unpublished, :published, :deleted], default: :published
-    field :slug, :string
+    field :slug, :string, autogenerate: {Short.ShortenedLinks.Slug, :generate, []}
     field :long_url, :string
     field :times_used, :integer, default: 0
 
@@ -17,7 +17,7 @@ defmodule Short.ShortenedLinks.ShortLink do
   def changeset(short_link, attrs) do
     short_link
     |> cast(attrs, [:slug, :long_url, :times_used, :status])
-    |> validate_required([:slug, :long_url])
+    |> validate_required([:long_url])
     |> unique_constraint(:slug)
   end
 

@@ -9,8 +9,12 @@
 </.header>
 
 <.list>
-  <:item title="Slug"><%= @short_link.slug %></:item>
-  <:item title="Long url"><%= @short_link.long_url %></:item>
+  <:item title="Slug">
+    <.link href={url(~p"/#{@short_link.slug}")}><%= url(~p"/#{@short_link.slug}") %></.link>
+  </:item>
+  <:item title="Long url">
+    <.link href={@short_link.long_url}><%= @short_link.long_url %></.link>
+  </:item>
   <:item title="Times used"><%= @short_link.times_used %></:item>
   <:item title="Status"><%= @short_link.status %></:item>
 </.list>
