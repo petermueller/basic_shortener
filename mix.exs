@@ -57,7 +57,8 @@ defmodule Short.MixProject do
       {:dns_cluster, "~> 0.1.1"},
       {:bandit, "~> 1.2"},
       {:mix_audit, "~> 2.1", only: [:dev, :test], runtime: false},
-      {:sobelow, "~> 0.13", only: [:dev, :test], runtime: false}
+      {:sobelow, "~> 0.13", only: [:dev, :test], runtime: false},
+      {:mix_test_interactive, "~> 2.0", only: :dev, runtime: false}
     ]
   end
 
