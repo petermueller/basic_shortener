@@ -10,6 +10,8 @@ jobs:
   build:
     name: Build and test (OTP ${{ matrix.otp }} | Elixir ${{ matrix.elixir }})
     runs-on: ubuntu-latest
+    env:
+      MIX_ENV: test
     services:
       postgres:
         # Docker Hub image
