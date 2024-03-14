@@ -1,0 +1,13 @@
+[
+  verbose: false,
+  private: false,
+  skip: false,
+  router: "",
+  exit: "false",
+  format: "txt",
+  out: "",
+  threshold: "low",
+  # This is never going to be deployed as-is
+  ignore: ["Config.HTTPS", "Config.CSP"],
+  ignore_files: [""],
+]
