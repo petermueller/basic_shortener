@@ -16,7 +16,7 @@ defmodule Short.ShortenedLinks.ShortLink do
   @doc false
   def changeset(short_link, attrs) do
     short_link
-    |> cast(attrs, [:slug, :long_url, :times_used, :status])
+    |> cast(attrs, [:slug, :long_url, :status])
     |> validate_required([:long_url])
     # Not "great", but good enough
     |> validate_format(:long_url, ~r/^https?:\/\/.+\..+$/)
