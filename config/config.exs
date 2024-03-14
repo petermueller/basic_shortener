@@ -9,7 +9,10 @@ import Config
 
 config :short,
   ecto_repos: [Short.Repo],
-  generators: [timestamp_type: :utc_datetime, binary_id: true]
+  generators: [
+    timestamp_type: :utc_datetime_usec,
+    binary_id: true
+  ]
 
 # Configures the endpoint
 config :short, ShortWeb.Endpoint,

@@ -1,0 +1,18 @@
+<.simple_form :let={f} for={@changeset} action={@action}>
+  <.error :if={@changeset.action}>
+    Oops, something went wrong! Please check the errors below.
+  </.error>
+  <.input field={f[:slug]} type="text" label="Slug" />
+  <.input field={f[:long_url]} type="text" label="Long url" />
+  <.input field={f[:times_used]} type="number" label="Times used" />
+  <.input
+    field={f[:status]}
+    type="select"
+    label="Status"
+    prompt="Choose a value"
+    options={Ecto.Enum.values(Short.ShortenedLinks.ShortLink, :status)}
+  />
+  <:actions>
+    <.button>Save Short link</.button>
+  </:actions>
+</.simple_form>

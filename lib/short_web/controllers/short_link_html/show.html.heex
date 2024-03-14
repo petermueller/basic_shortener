@@ -1,0 +1,18 @@
+<.header>
+  Short link <%= @short_link.id %>
+  <:subtitle>This is a short_link record from your database.</:subtitle>
+  <:actions>
+    <.link href={~p"/short_link/#{@short_link}/edit"}>
+      <.button>Edit short_link</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Slug"><%= @short_link.slug %></:item>
+  <:item title="Long url"><%= @short_link.long_url %></:item>
+  <:item title="Times used"><%= @short_link.times_used %></:item>
+  <:item title="Status"><%= @short_link.status %></:item>
+</.list>
+
+<.back navigate={~p"/short_link"}>Back to short_link</.back>

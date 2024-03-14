@@ -1,0 +1,26 @@
+<.header>
+  Listing Short link
+  <:actions>
+    <.link href={~p"/short_link/new"}>
+      <.button>New Short link</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table id="short_link" rows={@short_link_collection} row_click={&JS.navigate(~p"/short_link/#{&1}")}>
+  <:col :let={short_link} label="Slug"><%= short_link.slug %></:col>
+  <:col :let={short_link} label="Long url"><%= short_link.long_url %></:col>
+  <:col :let={short_link} label="Times used"><%= short_link.times_used %></:col>
+  <:col :let={short_link} label="Status"><%= short_link.status %></:col>
+  <:action :let={short_link}>
+    <div class="sr-only">
+      <.link navigate={~p"/short_link/#{short_link}"}>Show</.link>
+    </div>
+    <.link navigate={~p"/short_link/#{short_link}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={short_link}>
+    <.link href={~p"/short_link/#{short_link}"} method="delete" data-confirm="Are you sure?">
+      Delete
+    </.link>
+  </:action>
+</.table>

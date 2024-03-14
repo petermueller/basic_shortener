@@ -1,0 +1,8 @@
+<.header>
+  Edit Short link <%= @short_link.id %>
+  <:subtitle>Use this form to manage short_link records in your database.</:subtitle>
+</.header>
+
+<.short_link_form changeset={@changeset} action={~p"/short_link/#{@short_link}"} />
+
+<.back navigate={~p"/short_link"}>Back to short_link</.back>
