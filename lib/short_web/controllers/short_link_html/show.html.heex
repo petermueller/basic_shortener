@@ -8,15 +8,17 @@
   </:actions>
 </.header>
 
-<.list>
-  <:item title="Slug">
-    <.link href={url(~p"/#{@short_link.slug}")}><%= url(~p"/#{@short_link.slug}") %></.link>
-  </:item>
-  <:item title="Long url">
-    <.link href={@short_link.long_url}><%= @short_link.long_url %></.link>
-  </:item>
-  <:item title="Times used"><%= @short_link.times_used %></:item>
-  <:item title="Status"><%= @short_link.status %></:item>
-</.list>
+<div class="short-link">
+  <.list>
+    <:item title="Slug">
+      <.link href={url(~p"/#{@short_link.slug}")}><%= url(~p"/#{@short_link.slug}") %></.link>
+    </:item>
+    <:item title="Long url">
+      <.link href={@short_link.long_url}><%= @short_link.long_url %></.link>
+    </:item>
+    <:item title="Times used"><%= @short_link.times_used %></:item>
+    <:item title="Status"><%= @short_link.status %></:item>
+  </.list>
+</div>
 
 <.back navigate={~p"/short_link"}>Back to short_link</.back>

@@ -5,5 +5,6 @@ defmodule ShortWeb.AnonUserCanShortenLinkTest do
     conn
     |> visit(~p"/")
     |> submit_form("#short-link-form", short_link: %{long_url: "https://example.com"})
+    |> assert_has(".short-link", "Times used")
   end
 end
