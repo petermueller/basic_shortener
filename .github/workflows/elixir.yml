@@ -1,0 +1,71 @@
+name: Elixir CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    name: Build and test (OTP ${{ matrix.otp }} | Elixir ${{ matrix.elixir }})
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        # Docker Hub image
+        image: postgres
+        # Provide the password for postgres
+        env:
+          POSTGRES_HOST_AUTH_METHOD: trust
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        # Set health checks to wait until postgres has started
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+    strategy:
+      matrix:
+        include:
+          - elixir: '1.16'
+            otp: '26'
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Elixir
+      uses: erlef/setup-beam@v1
+      id: beam
+      with:
+        elixir-version: ${{ matrix.elixir }}
+        otp-version: ${{ matrix.otp }}
+
+    - name: Restore dependencies cache
+      uses: actions/cache@v4
+      id: mix-cache
+      with:
+        path: deps
+        key: ${{ runner.os }}-${{ matrix.otp }}-${{ matrix.elixir }}-mix-${{ hashFiles('**/mix.lock') }}
+        restore-keys: ${{ runner.os }}-${{ matrix.otp }}-${{ matrix.elixir }}-mix-
+
+    - name: Install dependencies
+      run: mix deps.get --only test
+
+    - name: Compile & lint dependencies
+      run: mix compile --warnings-as-errors
+      env:
+        MIX_ENV: test
+
+    - name: Check Formatting
+      run: mix format --check-formatted
+
+    - name: Run MixAudit
+      run: mix deps.audit
+
+    - name: Run security static-analysis (sobelow)
+      run: mix sobelow --config
+
+    - name: Run tests
+      run: mix test
