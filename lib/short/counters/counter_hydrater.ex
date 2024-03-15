@@ -52,7 +52,7 @@ defmodule Short.Counters.CounterHydrater do
 
   @impl GenServer
   def handle_continue(:hydrate_and_maybe_start_all, state) do
-    stored_child_states = state.context_mod.list_short_link()
+    stored_child_states = state.context_mod.list_short_links()
 
     {:noreply, state, {:continue, {:start_children, stored_child_states}}}
   end

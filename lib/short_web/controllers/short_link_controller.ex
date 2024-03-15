@@ -11,7 +11,7 @@ defmodule ShortWeb.ShortLinkController do
   end
 
   def index(conn, _params) do
-    short_link = ShortenedLinks.list_short_link()
+    short_link = ShortenedLinks.list_short_links()
     render(conn, :index, short_link_collection: short_link)
   end
 

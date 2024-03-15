@@ -13,11 +13,11 @@ defmodule Short.ShortenedLinks do
 
   ## Examples
 
-      iex> list_short_link()
+      iex> list_short_links()
       [%ShortLink{}, ...]
 
   """
-  def list_short_link do
+  def list_short_links do
     Repo.all(ShortLink)
   end
 
