@@ -33,7 +33,9 @@ defmodule Short.ShortenedLinks.ShortLink do
     |> cast(attrs, [:slug, :long_url, :status])
     |> validate_required([:long_url])
     # Not "great", but good enough
-    |> validate_format(:long_url, @scheme_and_domain_re, message: "must start with http(s):// and be a valid domain")
+    |> validate_format(:long_url, @scheme_and_domain_re,
+      message: "must start with http(s):// and be a valid domain"
+    )
     |> validate_format(:slug, ~r/^[[:alnum:]]+$/)
     |> unique_constraint(:slug)
   end

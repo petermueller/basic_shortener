@@ -17,7 +17,8 @@ defmodule Short.ShortenedLinks.Behaviour do
   @callback get_short_link_by_slug!(slug :: Slug.t()) :: ShortLink.t() | no_return()
   @callback create_short_link(attrs()) :: result_tuple()
   @callback update_short_link(ShortLink.t(), attrs()) :: result_tuple()
-  @callback add_times_used_to_short_link(ShortLink.t(), non_neg_integer()) :: {non_neg_integer(), [ShortLink.t()]}
+  @callback add_times_used_to_short_link(ShortLink.t(), non_neg_integer()) ::
+              {non_neg_integer(), [ShortLink.t()]}
   @callback delete_short_link(ShortLink.t()) :: result_tuple()
   @callback change_short_link(ShortLink.t(), attrs()) :: Ecto.Changeset.t(ShortLink.t())
 end
