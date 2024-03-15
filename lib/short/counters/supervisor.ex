@@ -35,7 +35,6 @@ defmodule Short.Counters.Supervisor do
     Supervisor.init(children, strategy: :rest_for_one)
   end
 
-
   # Makes multi-tenancy and testing easier
   def name, do: {:via, Registry, {UniqueRegistry, __MODULE__}}
 
