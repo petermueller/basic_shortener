@@ -76,7 +76,7 @@ defmodule Short.Counters.Counter do
   @spec init(t()) :: {:ok, t()} | {:ok, t(), {:continue, {:hydrate_state, slug()}}}
   def init(%__MODULE__{} = init_state) do
     if init_state.short_link do
-      dbg({:ok, %{init_state | counter: 0}})
+      {:ok, %{init_state | counter: 0}}
     else
       {:ok, init_state, {:continue, {:hydrate_state, init_state.slug}}}
     end
@@ -133,10 +133,10 @@ defmodule Short.Counters.Counter do
   @impl GenServer
   def handle_cast({:bump, value}, state) do
     if state.timer_ref do
-      dbg({:noreply, %{state | counter: state.counter + value}})
+      {:noreply, %{state | counter: state.counter + value}}
     else
       timer_ref = Process.send_after(self(), :persist, @persist_delay)
-      dbg({:noreply, %{state | counter: state.counter + value, timer_ref: timer_ref}})
+      {:noreply, %{state | counter: state.counter + value, timer_ref: timer_ref}}
     end
   end
 
