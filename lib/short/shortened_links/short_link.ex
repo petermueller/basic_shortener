@@ -15,6 +15,16 @@ defmodule Short.ShortenedLinks.ShortLink do
     timestamps(type: :utc_datetime_usec)
   end
 
+  @type t() :: %__MODULE__{
+          id: binary(),
+          status: :unpublished | :published | :deleted,
+          slug: Short.ShortenedLinks.Slug.t(),
+          long_url: String.t(),
+          times_used: non_neg_integer(),
+          inserted_at: DateTime.t(),
+          updated_at: DateTime.t()
+        }
+
   @scheme_and_domain_re ~r/^https?:\/\/.+\..+$/
 
   @doc false

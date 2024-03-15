@@ -12,6 +12,8 @@ defmodule Short.Application do
       Short.Repo,
       {DNSCluster, query: Application.get_env(:short, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: Short.PubSub},
+      {Registry, [name: Short.Counters.UniqueRegistry, keys: :unique]},
+      Short.Counters.Supervisor,
       # Start a worker by calling: Short.Worker.start_link(arg)
       # {Short.Worker, arg},
       # Start to serve requests, typically the last entry

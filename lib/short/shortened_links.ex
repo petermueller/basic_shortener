@@ -75,6 +75,17 @@ defmodule Short.ShortenedLinks do
     |> Repo.update()
   end
 
+  def add_times_used_to_short_link(%ShortLink{} = short_link, incr) do
+    Repo.update_all(
+      from(s in ShortLink,
+        where: s.id == ^short_link.id,
+        update: [inc: [times_used: ^incr]],
+        select: s
+      ),
+      set: [updated_at: DateTime.utc_now()]
+    )
+  end
+
   @doc """
   Deletes a short_link.
 

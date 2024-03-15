@@ -48,7 +48,9 @@ Now you can visit [`localhost:8080`](http://localhost:8080) from your browser.
 - datastore is mostly a write-cache
 ## Stats
   - for stats, start dumb (ets counters), maybe make better (events per redirect, storing client info, periodic aggregation)
-  - winner for now: `Counter` GenServer that can be refactored to `:counters` implementation
+  - winner for now: `Counter` GenServer combined w/ SQL (`UPDATE ... SET times_used + $1`)
+    - a lot of the process lifecycle would be reused anyway even w/ `:counters` or periodic DB aggregate approach
+    - **I'm assuming this interview is to also see if I understand OTP, so might as well**
   - wants
     - [ ] speedy collection/broadcast of increments
     - [ ] accuracy of increments

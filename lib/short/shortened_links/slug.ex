@@ -4,4 +4,6 @@ defmodule Short.ShortenedLinks.Slug do
   """
 
   use Puid, total: 10.0e5, risk: 1.0e12, chars: :wordSafe32
+
+  @type t() :: String.t()
 end

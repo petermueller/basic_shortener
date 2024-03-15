@@ -6,6 +6,7 @@ defmodule ShortWeb.ShortLinkController do
 
   def redirect_slug(conn, %{"slug" => slug}) do
     short_link = ShortenedLinks.get_short_link_by_slug!(slug)
+    short_link |> Short.Counters.Counter.bump() |> dbg()
     redirect(conn, external: short_link.long_url)
   end
 
@@ -22,6 +23,8 @@ defmodule ShortWeb.ShortLinkController do
   def create(conn, %{"short_link" => short_link_params}) do
     case ShortenedLinks.create_short_link(short_link_params) do
       {:ok, short_link} ->
+        Short.Counters.Counter.find_or_start(short_link)
+
         conn
         |> put_flash(:info, "Short link created successfully.")
         |> redirect(to: ~p"/short_link/#{short_link}")
