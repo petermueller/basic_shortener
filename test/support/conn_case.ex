@@ -19,15 +19,15 @@ defmodule ShortWeb.ConnCase do
 
   using do
     quote do
-      # The default endpoint for testing
-      @endpoint ShortWeb.Endpoint
-
       use ShortWeb, :verified_routes
 
       # Import conveniences for testing with connections
-      import Plug.Conn
       import Phoenix.ConnTest
+      import Plug.Conn
       import ShortWeb.ConnCase
+
+      # The default endpoint for testing
+      @endpoint ShortWeb.Endpoint
     end
   end
 

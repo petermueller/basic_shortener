@@ -17,7 +17,9 @@ defmodule ShortWeb.Router do
   scope "/", ShortWeb do
     pipe_through :browser
 
-    get "/", PageController, :home
+    resources "/short_link", ShortLinkController
+    get "/:slug", ShortLinkController, :redirect_slug
+    get "/", ShortLinkController, :new
   end
 
   # Other scopes may use custom stacks.

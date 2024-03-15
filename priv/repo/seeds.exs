@@ -9,3 +9,8 @@
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
+
+{:ok, _short_link} = Short.ShortenedLinks.create_short_link(%{long_url: "https://google.com"})
+{:ok, _short_link} = Short.ShortenedLinks.create_short_link(%{long_url: "https://example.com"})
+{:ok, _short_link} = Short.ShortenedLinks.create_short_link(%{long_url: "https://example.com"})
+{:ok, _short_link} = Short.ShortenedLinks.create_short_link(%{long_url: "https://1.1.1.1"})

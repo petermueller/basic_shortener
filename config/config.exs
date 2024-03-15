@@ -9,7 +9,10 @@ import Config
 
 config :short,
   ecto_repos: [Short.Repo],
-  generators: [timestamp_type: :utc_datetime, binary_id: true]
+  generators: [
+    timestamp_type: :utc_datetime_usec,
+    binary_id: true
+  ]
 
 # Configures the endpoint
 config :short, ShortWeb.Endpoint,
@@ -26,8 +29,7 @@ config :short, ShortWeb.Endpoint,
 config :esbuild,
   version: "0.17.11",
   short: [
-    args:
-      ~w(js/app.js --bundle --target=es2017 --outdir=../priv/static/assets --external:/fonts/* --external:/images/*),
+    args: ~w(js/app.js --bundle --target=es2017 --outdir=../priv/static/assets --external:/fonts/* --external:/images/*),
     cd: Path.expand("../assets", __DIR__),
     env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
   ]
