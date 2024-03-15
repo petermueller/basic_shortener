@@ -51,13 +51,15 @@ defmodule Short.MixProject do
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.1.1"},
       {:bandit, "~> 1.2"},
+      # Libraries added after `mix phx.new`
       {:mix_audit, "~> 2.1", only: [:dev, :test], runtime: false},
       {:sobelow, "~> 0.13", only: [:dev, :test], runtime: false},
       {:mix_test_interactive, "~> 2.0", only: :dev, runtime: false},
       {:phoenix_test, "~> 0.2.8", only: :test, runtime: false},
       {:faker, "~> 0.18", only: :test},
       {:puid, "~> 2.1"},
-      {:styler, "~> 0.11", only: [:dev, :test], runtime: false}
+      {:styler, "~> 0.11", only: [:dev, :test], runtime: false},
+      {:mox, "~> 1.0", only: :test}
     ]
   end
 
