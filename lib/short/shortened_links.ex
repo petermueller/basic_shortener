@@ -3,6 +3,8 @@ defmodule Short.ShortenedLinks do
   The ShortenedLinks context.
   """
 
+  @behaviour Short.ShortenedLinks.Behaviour
+
   import Ecto.Query, warn: false
 
   alias Short.Repo
@@ -13,11 +15,12 @@ defmodule Short.ShortenedLinks do
 
   ## Examples
 
-      iex> list_short_link()
+      iex> list_short_links()
       [%ShortLink{}, ...]
 
   """
-  def list_short_link do
+  @impl Short.ShortenedLinks.Behaviour
+  def list_short_links do
     Repo.all(ShortLink)
   end
 
@@ -35,8 +38,10 @@ defmodule Short.ShortenedLinks do
       ** (Ecto.NoResultsError)
 
   """
+  @impl Short.ShortenedLinks.Behaviour
   def get_short_link!(id), do: Repo.get!(ShortLink, id)
 
+  @impl Short.ShortenedLinks.Behaviour
   def get_short_link_by_slug!(slug), do: Repo.get_by!(ShortLink, slug: slug)
 
   @doc """
@@ -51,6 +56,7 @@ defmodule Short.ShortenedLinks do
       {:error, %Ecto.Changeset{}}
 
   """
+  @impl Short.ShortenedLinks.Behaviour
   def create_short_link(attrs \\ %{}) do
     %ShortLink{}
     |> ShortLink.changeset(attrs)
@@ -69,12 +75,14 @@ defmodule Short.ShortenedLinks do
       {:error, %Ecto.Changeset{}}
 
   """
+  @impl Short.ShortenedLinks.Behaviour
   def update_short_link(%ShortLink{} = short_link, attrs) do
     short_link
     |> ShortLink.changeset(attrs)
     |> Repo.update()
   end
 
+  @impl Short.ShortenedLinks.Behaviour
   def add_times_used_to_short_link(%ShortLink{} = short_link, incr) do
     Repo.update_all(
       from(s in ShortLink,
@@ -98,6 +106,7 @@ defmodule Short.ShortenedLinks do
       {:error, %Ecto.Changeset{}}
 
   """
+  @impl Short.ShortenedLinks.Behaviour
   def delete_short_link(%ShortLink{} = short_link) do
     Repo.delete(short_link)
   end
@@ -111,6 +120,7 @@ defmodule Short.ShortenedLinks do
       %Ecto.Changeset{data: %ShortLink{}}
 
   """
+  @impl Short.ShortenedLinks.Behaviour
   def change_short_link(%ShortLink{} = short_link, attrs \\ %{}) do
     ShortLink.changeset(short_link, attrs)
   end

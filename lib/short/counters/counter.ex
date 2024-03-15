@@ -146,7 +146,12 @@ defmodule Short.Counters.Counter do
     state =
       case state.context_mod.add_times_used_to_short_link(state.short_link, state.counter) do
         {1, [short_link]} ->
-          Logger.debug(message: "slug times_used updated", slug: state.slug, times_used: short_link.times_used)
+          Logger.debug(
+            message: "slug times_used updated",
+            slug: state.slug,
+            times_used: short_link.times_used
+          )
+
           %{state | counter: 0, short_link: short_link}
 
         {0, nil} ->
@@ -172,7 +177,13 @@ defmodule Short.Counters.Counter do
         {:error, reason} -> {reason, "Could not find or start a Counter"}
       end
 
-    Logger.warning(message: message, reason: reason, slug_or_short_link: slug_or_short_link, scope: scope)
+    Logger.warning(
+      message: message,
+      reason: reason,
+      slug_or_short_link: slug_or_short_link,
+      scope: scope
+    )
+
     nil
   end
 

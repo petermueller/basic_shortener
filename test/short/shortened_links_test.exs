@@ -10,9 +10,9 @@ defmodule Short.ShortenedLinksTest do
 
     @invalid_attrs %{status: nil, slug: nil, long_url: nil, times_used: 42}
 
-    test "list_short_link/0 returns all short_link" do
+    test "list_short_links/0 returns all short_link" do
       short_link = short_link_fixture()
-      assert ShortenedLinks.list_short_link() == [short_link]
+      assert ShortenedLinks.list_short_links() == [short_link]
     end
 
     test "get_short_link!/1 returns the short_link with given id" do
