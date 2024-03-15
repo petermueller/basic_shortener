@@ -15,13 +15,15 @@ defmodule Short.ShortenedLinks.ShortLink do
     timestamps(type: :utc_datetime_usec)
   end
 
+  @scheme_and_domain_re ~r/^https?:\/\/.+\..+$/
+
   @doc false
   def changeset(short_link, attrs) do
     short_link
     |> cast(attrs, [:slug, :long_url, :status])
     |> validate_required([:long_url])
     # Not "great", but good enough
-    |> validate_format(:long_url, ~r/^https?:\/\/.+\..+$/)
+    |> validate_format(:long_url, @scheme_and_domain_re, message: "must start with http(s):// and be a valid domain")
     |> validate_format(:slug, ~r/^[[:alnum:]]+$/)
     |> unique_constraint(:slug)
   end
