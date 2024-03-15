@@ -20,6 +20,10 @@ config :short, ShortWeb.Endpoint,
   secret_key_base: "vU6lz+jbqQPgeMYWyAbLTdB8SfRkSwx30olVfnBfMwqlj2tj/pvLB4I/xlxjU7dB",
   server: false
 
+# Toggle to enable/disable the default-named `Short.Counters.Supervisor` during tests
+# See `Short.Counters.Supervisor.start_link/1` for the implementation.
+# config :short, Short.Counters.Supervisor, on_startup: false
+
 # Print only warnings and errors during test
 config :logger, level: :warning
 
