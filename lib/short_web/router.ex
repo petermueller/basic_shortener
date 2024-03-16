@@ -18,6 +18,8 @@ defmodule ShortWeb.Router do
     pipe_through :browser
 
     resources "/short_link", ShortLinkController
+    get "/stats", StatsController, :index
+    get "/stats/csv", StatsController, :csv
     get "/:slug", ShortLinkController, :redirect_slug
     get "/", ShortLinkController, :new
   end

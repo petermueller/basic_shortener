@@ -64,7 +64,8 @@ defmodule Short.MixProject do
       {:faker, "~> 0.18", only: :test},
       {:puid, "~> 2.1"},
       {:styler, "~> 0.11", only: [:dev, :test], runtime: false},
-      {:mox, "~> 1.0", only: :test}
+      {:mox, "~> 1.0", only: :test},
+      {:csv, "~> 3.2"}
     ]
   end
 

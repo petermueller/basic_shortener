@@ -1,0 +1,30 @@
+<.header>
+  Stats
+  <:actions>
+    <.link href={~p"/"}>
+      <.button>New Short link</.button>
+    </.link>
+    <.link href={~p"/stats/csv"}>
+      <.button id="export_csv">Export CSV</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table
+  id="short_links_stats"
+  rows={@short_link_collection}
+  row_click={&JS.navigate(~p"/short_link/#{&1}")}
+>
+  <:col :let={short_link} label="Short URL">
+    <.link href={url(~p"/#{short_link.slug}")}>
+      <%= url(~p"/#{short_link.slug}") %>
+    </.link>
+  </:col>
+  <:col :let={short_link} label="Long URL">
+    <.link class="long_url" href={short_link.long_url}><%= short_link.long_url %></.link>
+  </:col>
+  <:col :let={short_link} label="Times Used">
+    <span class="times_used text-violet-600"><%= short_link.times_used %></span>
+  </:col>
+  <:col :let={short_link} label="Status"><%= short_link.status %></:col>
+</.table>
