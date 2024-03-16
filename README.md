@@ -1,7 +1,7 @@
 # Short
 > A basic URL Shortener
 
-## Setup
+****## Setup
 - Start a Postgres DB:
   - `docker run -d -p 5432:5432 -e POSTGRES_HOST_AUTH_METHOD=trust --name=short_db postgres`
 - `mix setup`
@@ -111,4 +111,4 @@ Now you can visit [`localhost:8080`](http://localhost:8080) from your browser.
 - [?] Performance capabilities
   - [ ] Form @ 5 req/sec
   - [ ] `/{slug}` @ 25 req/sec
-  - I don't see why not, especially w/ `MIX_ENV=prod`, but I didn't want to DoS someone finding out. Could probably use `wrk` or `vegeta`
+  - I don't see why not, especially w/ `MIX_ENV=prod`, but it's later and I didn't want to put the work in to figure out how to validate responses that are not 200s. Could probably use `wrk` or `vegeta`
