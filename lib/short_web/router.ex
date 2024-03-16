@@ -19,6 +19,7 @@ defmodule ShortWeb.Router do
 
     resources "/short_link", ShortLinkController
     get "/stats", StatsController, :index
+    get "/stats/csv", StatsController, :csv
     get "/:slug", ShortLinkController, :redirect_slug
     get "/", ShortLinkController, :new
   end

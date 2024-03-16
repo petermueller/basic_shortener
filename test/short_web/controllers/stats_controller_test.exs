@@ -3,26 +3,26 @@ defmodule ShortWeb.StatsControllerTest do
 
   import Short.ShortenedLinksFixtures
 
+  setup do
+    example_com_stream =
+      ["https://example.com/"]
+      |> Stream.cycle()
+      |> Stream.with_index(1)
+      |> Stream.map(fn {url, idx} ->
+        {url <> to_string(idx), idx}
+      end)
+
+    short_links =
+      for {url, idx} <- Enum.take(example_com_stream, 10) do
+        [long_url: url]
+        |> short_link_fixture()
+        |> Short.ShortenedLinks.add_times_used_to_short_link(idx)
+      end
+
+    [short_links: short_links]
+  end
+
   describe "index" do
-    setup do
-      example_com_stream =
-        ["https://example.com/"]
-        |> Stream.cycle()
-        |> Stream.with_index(1)
-        |> Stream.map(fn {url, idx} ->
-          {url <> to_string(idx), idx}
-        end)
-
-      short_links =
-        for {url, idx} <- Enum.take(example_com_stream, 10) do
-          [long_url: url]
-          |> short_link_fixture()
-          |> Short.ShortenedLinks.add_times_used_to_short_link(idx)
-        end
-
-      [short_links: short_links]
-    end
-
     test "lists stats for all short links", %{conn: conn} do
       conn = get(conn, ~p"/stats")
       assert body = html_response(conn, 200)
@@ -49,6 +49,14 @@ defmodule ShortWeb.StatsControllerTest do
                {"https://example.com/2", "2"},
                {"https://example.com/1", "1"}
              ]
+    end
+  end
+
+  describe "csv" do
+    test "downloads a CSV of the stats", %{conn: conn} do
+      conn = get(conn, ~p"/stats/csv")
+
+      assert response(conn, 200)
     end
   end
 end
