@@ -1,14 +1,27 @@
 # Short
 > A basic URL Shortener
 
-Start a Postgres DB:
-* `docker run -d -p 5432:5432 -e POSTGRES_HOST_AUTH_METHOD=trust --name=short_db postgres`
+## Setup
+- Start a Postgres DB:
+  - `docker run -d -p 5432:5432 -e POSTGRES_HOST_AUTH_METHOD=trust --name=short_db postgres`
+- `mix setup`
+
+## Run
+- w/ iex console
+  - `iex -S mix phx.server`
+- for load testing
+  - `MIX_ENV=prod DATABASE_URL=ecto://postgres:postgres@localhost/short_dev SECRET_KEY_BASE=ZkgY71i21heqrNTge2P04wBR180ItBba2pchU4r7s/Prnza4qT+qyFSXk7LGTKK4 PHX_HOST=localhost mix do phx.digest, phx.server`
+
+## Test
+- `mix test`
 
 To start "Short":
   * Run `mix setup` to install and setup dependencies
   * Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
 
 Now you can visit [`localhost:8080`](http://localhost:8080) from your browser.
+
+# Setup
 
 # Design Decisions/Notes
 ## Slug generation
@@ -90,11 +103,12 @@ Now you can visit [`localhost:8080`](http://localhost:8080) from your browser.
 
 
 ## Requirements
-- [ ] Form on root
-  - [ ] validate invalid URL schemes
-- [ ] slug auto-generates
-- [ ] redirect slug to original
-- [ ] Stats page
-- [ ] Performance capabilities
+- [x] Form on root
+  - [x] validate invalid URL schemes
+- [x] slug auto-generates
+- [x] redirect slug to original
+- [x] Stats page
+- [?] Performance capabilities
   - [ ] Form @ 5 req/sec
   - [ ] `/{slug}` @ 25 req/sec
+  - I don't see why not, especially w/ `MIX_ENV=prod`, but I didn't want to DoS someone finding out. Could probably use `wrk` or `vegeta`
