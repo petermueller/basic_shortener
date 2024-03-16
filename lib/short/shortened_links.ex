@@ -18,10 +18,20 @@ defmodule Short.ShortenedLinks do
       iex> list_short_links()
       [%ShortLink{}, ...]
 
+      iex> list_short_links(order_by: [desc: :times_used])
+      [%ShortLink{times_used: 3}, %ShortLink{times_used: 2}, ...]
+
   """
   @impl Short.ShortenedLinks.Behaviour
-  def list_short_links do
-    Repo.all(ShortLink)
+  def list_short_links(opts \\ []) do
+    base_query = from(s in ShortLink)
+
+    opts
+    |> Enum.reduce(base_query, fn
+      {:order_by, kw_list}, query -> order_by(query, ^kw_list)
+      _, query -> query
+    end)
+    |> Repo.all()
   end
 
   @doc """

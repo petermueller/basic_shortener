@@ -10,9 +10,31 @@ defmodule Short.ShortenedLinksTest do
 
     @invalid_attrs %{status: nil, slug: nil, long_url: nil, times_used: 42}
 
-    test "list_short_links/0 returns all short_link" do
+    test "list_short_links/0 returns all short_links" do
       short_link = short_link_fixture()
       assert ShortenedLinks.list_short_links() == [short_link]
+    end
+
+    test "list_short_links/1 returns all short_links ordered by given order" do
+      short_link1 = short_link_fixture()
+      short_link2 = short_link_fixture()
+      short_link3 = short_link_fixture()
+
+      {_, [short_link1]} = Short.ShortenedLinks.add_times_used_to_short_link(short_link1, 1)
+      {_, [short_link2]} = Short.ShortenedLinks.add_times_used_to_short_link(short_link2, 3)
+      {_, [short_link3]} = Short.ShortenedLinks.add_times_used_to_short_link(short_link3, 2)
+
+      assert ShortenedLinks.list_short_links(order_by: [desc: :times_used]) == [
+               short_link2,
+               short_link3,
+               short_link1
+             ]
+
+      assert ShortenedLinks.list_short_links(order_by: [asc: :times_used]) == [
+               short_link1,
+               short_link3,
+               short_link2
+             ]
     end
 
     test "get_short_link!/1 returns the short_link with given id" do
